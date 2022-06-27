@@ -1,0 +1,2 @@
+qfprog --port /dev/ttyACM0 --appfpga ./fpga/rtl/AL4S3B_FPGA_Top.bin --mode fpga
+qfprog --port /dev/ttyACM0 --m4app ./GCC_Project/output/bin/qorc_fpga_breathectrl.bin --mode fpga-m4

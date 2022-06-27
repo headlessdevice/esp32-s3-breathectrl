@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/kshitij/esp/esp_fpga_breathectrl/build/CMakeFiles/bootloader
+/home/kshitij/esp/esp_fpga_breathectrl/build/CMakeFiles/bootloader.rule
+/home/kshitij/esp/esp_fpga_breathectrl/build/CMakeFiles/bootloader-complete.rule
+/home/kshitij/esp/esp_fpga_breathectrl/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/kshitij/esp/esp_fpga_breathectrl/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/kshitij/esp/esp_fpga_breathectrl/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/kshitij/esp/esp_fpga_breathectrl/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/home/kshitij/esp/esp_fpga_breathectrl/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/kshitij/esp/esp_fpga_breathectrl/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/kshitij/esp/esp_fpga_breathectrl/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
