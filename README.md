@@ -1,8 +1,7 @@
-# Sample GitLab Project
+# ESP32 EOS_S3 BREATHE_CTRL
 
-This sample project shows how a project in GitLab looks for demonstration purposes. It contains issues, merge requests and Markdown files in many branches,
-named and filled with lorem ipsum.
+In this project we flash the PWM module for LED breathing effect in the eFPGA of EOS_S3, 
+and we control the duration of the breathing effect from the ESP32.
 
-You can look around to get an idea how to structure your project and, when done, you can safely delete this project.
-
-[Learn more about creating GitLab projects.](https://docs.gitlab.com/ee/gitlab-basics/create-project.html)
+The Pygmy module and the ESP32 on the LC vaman are connected through SPI lines.
+(Jumper caps J7, J8, J9 and J10)
