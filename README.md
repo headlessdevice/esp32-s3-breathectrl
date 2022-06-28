@@ -23,11 +23,11 @@ increasing it until it reaches 100%, then slowly decreasing it.
 
 |MIN| | <---------- INHALE ----------> | MAX | <---------- EXHALE ----------> | |MIN|
 
-| <----------------------------------- COUNTER -----------------------------------> |
+| <-----------------------------------     COUNTER -----------------------------------> |
 
-| <--- 256 ---> || <--- 256 ---> || <--- 256 ---> || <--- 256 ---> || <--- 256 ---> |
+| <--- 256 ---> ||  <--- 256 ---> ||  <--- 256 ---> ||  <--- 256 ---> ||  <--- 256 ---> |
 
-| ON |   OFF    ||  ON   |  OFF  ||    ON |OFF    ||  ON   |  OFF  || ON |   OFF    |
+|  ON  |   OFF    ||   ON    |  OFF  ||  ON   |  OFF    ||  ON   |   OFF  || ON  |   OFF    |
 
 | inhale period, increasing on period     |   | exhale period, decreasing on period |
 
