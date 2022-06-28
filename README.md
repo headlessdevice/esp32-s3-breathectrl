@@ -21,6 +21,7 @@ of that period the LED is on.
 - To create a breathing effect, we slowly modulate the brightness level, first
 increasing it until it reaches 100%, then slowly decreasing it.
 
+<pre>
 |MIN| | <---------- INHALE ----------> | MAX | <---------- EXHALE ----------> | |MIN|
 
 | <-----------------------------------     COUNTER -----------------------------------> |
@@ -30,6 +31,7 @@ increasing it until it reaches 100%, then slowly decreasing it.
 |  ON  |   OFF    ||   ON    |  OFF  ||  ON   |  OFF    ||  ON   |   OFF  || ON  |   OFF    |
 
 | inhale period, increasing on period     |   | exhale period, decreasing on period |
+</pre>
 
 - step-counter -> will be used to mark the start of a step-period (1/60 sec)
 at each step mark, the step-period-counter start running and run for 256 clock cycles.
