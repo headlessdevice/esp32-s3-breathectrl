@@ -111,7 +111,7 @@ clock_cycles_per_step = (float)clock_cycles/512;
 ```
 Now we have the values to be passed into the function 'QLSPI_Write_S3_Mem', which is called inside the breathe anable function.
 
-##Building and Flashing
+## Building and Flashing
 
 -To build and flash the FPGA binaries place this project into the 'qf_apps' directory of the qorc-sdk.
 Run 'source ../../envsetup.sh', then navigate to 'fpga' directory present inside this project and run the command 'make' 
@@ -122,7 +122,7 @@ Now to flash the binary run the following command :
 qfprog --port <COM port> --appfpga ./rtl/AL4S3B_FPGA_Top.bin --mode fpga
 ```
 
-- To flash the ESP32 navigate to esp_fpga_breathectrl directory and run the command
+-To flash the ESP32 navigate to esp_fpga_breathectrl directory and run the command
 'get_idf' and 'idf.py build' to build the project, and 'idf.py flash -p <COM port>' to flash the binaries into the ESP.
 
 
