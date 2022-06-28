@@ -33,7 +33,7 @@ step-counter
     
 at each clk -> check mode, duty-cycle, duty-counter and set the BREATHE_o on or off.
 if (inhale), BREATHE_o is ON as long as (duty-counter < duty-cycle (duty-cycle is increasing)
-if (exhale), BREATHE_o is ON as long as duty-counter > duty-cycle (duty-cycle is decreasing)
+if (exhale), BREATHE_o is ON as long as (duty-counter > duty-cycle (duty-cycle is decreasing)
 
 next_ctr -> triggers duty cycle change, happens every "period" cycles (24-bits)
 at each next_ctr, duty cycle changes by 1, and we need 0 - 0xff - 0 for inhale-exhale
@@ -52,7 +52,7 @@ Now to do it from ESP32, we first add the component 'ql_spi' in the esp32 projec
 directory. This component has some library functions which enable us to communicate directly with 
 the EOS_S2.
 
-Now to write into the registers we use the function:
+Now to write into the EOS_S3 peripheral registers we use the function:
 
 '''
 QL_Status QLSPI_Write_S3_Mem (uint32_t addr, uint8_t *data, uint32_t len) 
@@ -78,6 +78,9 @@ So for example to write into RED LED register we have the macros:
                                                                 FPGA_ONION_BREATHECTRL_REG_OFFSET_BREATHE_0_CONFIG)  // (0x40020000+0x00003000+0x00000000 = 0x40023000)
 '''
 
+
+The data we write into this register (0x40023000) from the above example, to control the breathing of RED LED, is the
+duration of the breathe cycle.
 
 
 
