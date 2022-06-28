@@ -10,6 +10,7 @@ The Pygmy module and the ESP32 on the LC vaman are connected through SPI lines.
   <img src="./media/esp32-eoss3.png" alt="ESP32 EOSS_S3 LED Breathe control block diagram LC Vaman" height="500">
 </p>
 
+## Working
 
 To create a breathing effect, we slowly modulate the brightness level, first
 increasing it until it reaches 100%, then slowly decreasing it.
@@ -45,7 +46,7 @@ with 8-bit pwm, 12MHz input clock, 0x10000 cycle period per duty-cycle will give
 an approximately human breathing cycle appearance ~3seconds.
 
 
-- controlling using ESP32
+## Controlling using ESP32
 
 To change the breathe duration we write different values in the FPGA peripheral base registers,
 Now to do it from ESP32, we first add the component 'ql_spi' in the esp32 project under 'components' 
@@ -54,9 +55,9 @@ the EOS_S2.
 
 Now to write into the EOS_S3 peripheral registers we use the function:
 
-'''
+```
 QL_Status QLSPI_Write_S3_Mem (uint32_t addr, uint8_t *data, uint32_t len) 
-'''
+```
 
 'addr' is the address of the register we wish to write into,
 'data' is the value to be written and 'len' is the length of the data to be written. 
@@ -64,7 +65,7 @@ QL_Status QLSPI_Write_S3_Mem (uint32_t addr, uint8_t *data, uint32_t len)
 The FPGA peripheral registers of EOSS_S3 we wish to write start from 0x40020000 
 
 So for example to write into RED LED register we have the macros:
-'''
+```
 #define PERIPH_BASE                                             (0x40000000)
 #define FPGA_PERIPH_BASE                                        (PERIPH_BASE + 0x00020000)    
 #define FPGA_ONION_PERIPH_BASE_ADDR                             FPGA_PERIPH_BASE            //0x40020000
@@ -76,7 +77,7 @@ So for example to write into RED LED register we have the macros:
 #define FPGA_ONION_BREATHECTRL_REG_ADDR_BREATHE_0_CONFIG        (uint32_t*)(FPGA_ONION_PERIPH_BASE_ADDR + \
                                                                 FPGA_ONION_BREATHECTRL_MODULE_OFFSET + \
                                                                 FPGA_ONION_BREATHECTRL_REG_OFFSET_BREATHE_0_CONFIG)  // (0x40020000+0x00003000+0x00000000 = 0x40023000)
-'''
+```
 
 
 The data we write into this register (0x40023000) from the above example, to control the breathing of RED LED, is the
