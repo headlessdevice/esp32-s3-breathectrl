@@ -71,8 +71,8 @@ QL_Status QLSPI_Write_S3_Mem (uint32_t addr, uint8_t *data, uint32_t len)
 'data' is the value to be written and 'len' is the length of the data to be written. 
 
 The FPGA peripheral registers of EOSS_S3 we wish to write start from 0x40020000 
-
 So for example to write into RED LED register we have the macros:
+
 ```
 #define PERIPH_BASE                                             (0x40000000)
 #define FPGA_PERIPH_BASE                                        (PERIPH_BASE + 0x00020000)    
