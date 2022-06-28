@@ -23,14 +23,10 @@ increasing it until it reaches 100%, then slowly decreasing it.
 
 <pre>
 |MIN| | <---------- INHALE ----------> | MAX | <---------- EXHALE ----------> | |MIN|
-
-| <-----------------------------------     COUNTER -----------------------------------> |
-
-| <--- 256 ---> ||  <--- 256 ---> ||  <--- 256 ---> ||  <--- 256 ---> ||  <--- 256 ---> |
-
-|  ON  |   OFF    ||   ON    |  OFF  ||  ON   |  OFF    ||  ON   |   OFF  || ON  |   OFF    |
-
-| inhale period, increasing on period     |   | exhale period, decreasing on period |
+| <----------------------------------- COUNTER -----------------------------------> |
+| <--- 256 ---> || <--- 256 ---> || <--- 256 ---> || <--- 256 ---> || <--- 256 ---> |
+| ON |   OFF    ||  ON   |  OFF  ||    ON |OFF    ||  ON   |  OFF  || ON |   OFF    |
+|  inhale period, increasing on period    |    exhale period, decreasing on period  |
 </pre>
 
 - step-counter -> will be used to mark the start of a step-period (1/60 sec)
