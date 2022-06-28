@@ -71,7 +71,8 @@ QL_Status QLSPI_Write_S3_Mem (uint32_t addr, uint8_t *data, uint32_t len)
 'data' is the value to be written and 'len' is the length of the data to be written. 
 
 The FPGA peripheral registers of EOSS_S3 we wish to write start from 0x40020000 
-So for example to write into RED LED register we have the macros:
+So for example to write into RED LED register we have the macro value:
+
 ```
 #define PERIPH_BASE                                             (0x40000000)
 #define FPGA_PERIPH_BASE                                        (PERIPH_BASE + 0x00020000)    
@@ -86,12 +87,43 @@ So for example to write into RED LED register we have the macros:
                                                                 FPGA_ONION_BREATHECTRL_REG_OFFSET_BREATHE_0_CONFIG)  // (0x40020000+0x00003000+0x00000000 = 0x40023000)
 ```
 
-
 The data we write into this register (0x40023000) from the above example, to control the breathing of RED LED, is the
 duration of the breathe cycle.
 
+We call the following function continuously to enable the breathing effect: 
 
+```
+void breathe_enable(uint8_t pad_num, uint32_t breathe_period_ms)
+```
 
+we pass the pad number 'pad_num', pad 18 for LED blue, pad 21 for LED green and pad 22 for LED red.
+and the duration of the breathing effect 'breathe_period_ms'
+
+we convert the breathe duration into the clock cycles per step:
+
+```
+// clock_cycles/1000msec = clock_rate_hz	
+clock_cycles = ((float)clock_rate_hz/1000) * breathe_period_ms; // prevent 32-bit overflow!
+
+// remember that the value passed in here is for the duration of the breathe cycle (inhale+exhale)
+// we need to convert this to clock_cycles/step, where total_steps = 2*(1<<PWM_RESOLUTION_BITS)
+clock_cycles_per_step = (float)clock_cycles/512;
+```
+Now we have the values to be passed into the function 'QLSPI_Write_S3_Mem', which is called inside the breathe anable function.
+
+##Building and Flashing
+
+-To build and flash the FPGA binaries place this project into the 'qf_apps' directory of the qorc-sdk.
+Run 'source ../../envsetup.sh', then navigate to 'fpga' directory present inside this project and run the command 'make' 
+from the command line to build the project. 
+
+Now to flash the binary run the following command :
+```
+qfprog --port <COM port> --appfpga ./rtl/AL4S3B_FPGA_Top.bin --mode fpga
+```
+
+- To flash the ESP32 navigate to esp_fpga_breathectrl directory and run the command
+'get_idf' and 'idf.py build' to build the project, and 'idf.py flash -p <COM port>' to flash the binaries into the ESP.
 
 
 
