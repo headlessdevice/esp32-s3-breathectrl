@@ -7,7 +7,7 @@ The Pygmy module and the ESP32 on the LC vaman are connected through SPI lines.
 (Jumper caps J7, J8, J9 and J10)
 
 <p>
-  <img src="./media/esp32-eoss3.png" alt="ESP32 EOSS_S3 LED Breathe control block diagram LC Vaman" height="500">
+  <img src="./media/esp32-eoss3.png" alt="ESP32 EOSS_S3 LED Breathe control block diagram LC Vaman" height="200">
 </p>
 
 ## Theory of operation
@@ -90,7 +90,6 @@ So for example to write into RED LED register we have the macros:
 
 The data we write into this register (0x40023000) from the above example, to control the breathing of RED LED, is the
 duration of the breathe cycle.
-
 
 
 
