@@ -123,7 +123,8 @@ qfprog --port <COM port> --appfpga ./rtl/AL4S3B_FPGA_Top.bin --mode fpga
 ```
 
 - To flash the ESP32 navigate to esp_fpga_breathectrl directory and run the command
-'get_idf' and 'idf.py build' to build the project, and 'idf.py flash -p <COM port>' to flash the binaries into the ESP.
+'get_idf' and 'idf.py build' to build the project (make sure you have esp-idf version 4.3 or lower), 
+and 'idf.py flash -p <//COM port>' to flash the binaries into the ESP.
 
 
 
