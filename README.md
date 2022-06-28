@@ -10,37 +10,43 @@ The Pygmy module and the ESP32 on the LC vaman are connected through SPI lines.
   <img src="./media/esp32-eoss3.png" alt="ESP32 EOSS_S3 LED Breathe control block diagram LC Vaman" height="500">
 </p>
 
-## Working
+## Theory of operation
 
-To create a breathing effect, we slowly modulate the brightness level, first
+- LED brightness can be achieved by rapidly turning on and off the LED; the
+longer we leave the LED on, the brighter it will appear. So long as we
+"flash" the LED at a high rate, this will be imperceptable to the human
+eye. This circuit uses a 256 clock-cycle period in which *a varying fraction*
+of that period the LED is on. 
+
+- To create a breathing effect, we slowly modulate the brightness level, first
 increasing it until it reaches 100%, then slowly decreasing it.
 
 |MIN| | <---------- INHALE ----------> | MAX | <---------- EXHALE ----------> | |MIN|
 | <----------------------------------- COUNTER -----------------------------------> |
 | <--- 256 ---> || <--- 256 ---> || <--- 256 ---> || <--- 256 ---> || <--- 256 ---> |
-| ON |   OFF    ||  ON   |  OFF  ||    ON     |OFF||  ON   |  OFF  || ON |   OFF    |
-| inhale period, increasing on period  |      | exhale period, decreasing on period |
+| ON |   OFF    ||  ON   |  OFF  ||    ON |OFF    ||  ON   |  OFF  || ON |   OFF    |
+| inhale period, increasing on period     |   | exhale period, decreasing on period |
 
-step-counter -> will be used to mark the start of a step-period (1/60 sec)
+- step-counter -> will be used to mark the start of a step-period (1/60 sec)
 at each step mark, the step-period-counter start running and run for 256 clock cycles.
 at each step, the duty-cycle will be incremented from zero to 255, rollover to zero 
 and upto 255 again.
 Each time duty-cycle reaches 256, we toggle between inhale and exhale mode.
 
-step-counter 
+- step-counter 
    -> trigger step-period-counter -> duty-counter running
    -> trigger duty-cycle-increment
    -> && duty-cycle reaches max -> toggle inhale mode
     
-at each clk -> check mode, duty-cycle, duty-counter and set the BREATHE_o on or off.
+- at each clk -> check mode, duty-cycle, duty-counter and set the BREATHE_o on or off.
 if (inhale), BREATHE_o is ON as long as (duty-counter < duty-cycle (duty-cycle is increasing)
 if (exhale), BREATHE_o is ON as long as (duty-counter > duty-cycle (duty-cycle is decreasing)
 
-next_ctr -> triggers duty cycle change, happens every "period" cycles (24-bits)
+- next_ctr -> triggers duty cycle change, happens every "period" cycles (24-bits)
 at each next_ctr, duty cycle changes by 1, and we need 0 - 0xff - 0 for inhale-exhale
 so, duty_cycle sets = 256x2 = 512.
 
-if period cycles = 0x10000 (0x10000 cycles at each brightness level in inhale+exhale)
+- if period cycles = 0x10000 (0x10000 cycles at each brightness level in inhale+exhale)
 then one inhale-exhale = 0x10000 * 512 = 65536 * 512 = 33 554 432 clocks or 0x2000000 clocks.
 with 8-bit pwm, 12MHz input clock, 0x10000 cycle period per duty-cycle will give 
 an approximately human breathing cycle appearance ~3seconds.
